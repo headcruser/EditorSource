@@ -15,7 +15,7 @@ public class windowEditorController implements IUpdateStatusConsole
     public windowEditorController(WindowEditor view ) throws Exception
     {
         editorView=view; 
-        editorView.addCarentEventListener(this);
+        addCarentEventListener();
         editorView.windowCenterPosition();
     }
     
@@ -40,5 +40,10 @@ public class windowEditorController implements IUpdateStatusConsole
         } catch (Exception ex) {}
 
         editorView.updateStatus( linea, columna );
+    }
+    
+    private void addCarentEventListener()
+    {
+        editorView.addCarentEventListener(this);
     }
 }
