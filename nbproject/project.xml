@@ -6,6 +6,7 @@
             <name>EditorSource</name>
             <source-roots>
                 <root id="src.dir"/>
+                <root id="src.sources.dir"/>
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>

@@ -14,6 +14,7 @@ public class WindowEditor extends javax.swing.JFrame
     {
            initComponents();
            initTextLineAspect();
+           iconApp();
     }
     
      public void updateStatus(final int linea, final int columna) 
@@ -48,7 +49,8 @@ public class WindowEditor extends javax.swing.JFrame
         status = new javax.swing.JLabel();
         menuPrincipal = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
-        itemNuevo = new javax.swing.JMenuItem();
+        itemNew = new javax.swing.JMenuItem();
+        itemSave = new javax.swing.JMenuItem();
 
         Menu.setBackground(new java.awt.Color(0, 0, 0));
         Menu.setText("jMenu1");
@@ -68,7 +70,7 @@ public class WindowEditor extends javax.swing.JFrame
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         titulo.setForeground(new java.awt.Color(255, 255, 255));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("EDITOR SIMPLE");
+        titulo.setText("EDITOR SOURCE");
         titulo.setToolTipText("Descripcion");
         titulo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         titulo.setOpaque(true);
@@ -82,7 +84,7 @@ public class WindowEditor extends javax.swing.JFrame
 
         panelStatus.setLayout(new java.awt.BorderLayout());
 
-        status.setText("jLabel1");
+        status.setText(" ");
         panelStatus.add(status, java.awt.BorderLayout.LINE_END);
 
         ContenedorPrincipal.add(panelStatus, java.awt.BorderLayout.PAGE_END);
@@ -93,11 +95,18 @@ public class WindowEditor extends javax.swing.JFrame
         menuPrincipal.setForeground(new java.awt.Color(51, 51, 51));
         menuPrincipal.setOpaque(true);
 
+        fileMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/OpenFile.png"))); // NOI18N
         fileMenu.setText("File");
 
-        itemNuevo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        itemNuevo.setText("Nuevo");
-        fileMenu.add(itemNuevo);
+        itemNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        itemNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document.png"))); // NOI18N
+        itemNew.setText("Nuevo");
+        fileMenu.add(itemNew);
+
+        itemSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        itemSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/saveFile.png"))); // NOI18N
+        itemSave.setText("Guardar");
+        fileMenu.add(itemSave);
 
         menuPrincipal.add(fileMenu);
 
@@ -111,12 +120,17 @@ public class WindowEditor extends javax.swing.JFrame
         lineNumberAspect= new TextLineNumber(editor);
         scrollEditor.setRowHeaderView( lineNumberAspect );
     }
+    
+    private void iconApp(){
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource( "/icons/logo.png") ).getImage());
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContenedorPrincipal;
     private javax.swing.JMenu Menu;
     private javax.swing.JTextArea editor;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenuItem itemNuevo;
+    private javax.swing.JMenuItem itemNew;
+    private javax.swing.JMenuItem itemSave;
     private javax.swing.JMenuBar menuPrincipal;
     private javax.swing.JPanel panelStatus;
     private javax.swing.JScrollPane scrollEditor;
