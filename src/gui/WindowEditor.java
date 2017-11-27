@@ -42,11 +42,12 @@ public class WindowEditor extends javax.swing.JFrame
 
         Menu = new javax.swing.JMenu();
         ContenedorPrincipal = new javax.swing.JPanel();
-        titulo = new javax.swing.JLabel();
         scrollEditor = new javax.swing.JScrollPane();
         editor = new javax.swing.JTextArea();
         panelStatus = new javax.swing.JPanel();
         status = new javax.swing.JLabel();
+        menuToolbar = new javax.swing.JToolBar();
+        buttonSave = new javax.swing.JButton();
         menuPrincipal = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         itemNew = new javax.swing.JMenuItem();
@@ -57,7 +58,7 @@ public class WindowEditor extends javax.swing.JFrame
         Menu.setOpaque(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("EditorCode");
+        setTitle("EditorSource");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setName("windowApp"); // NOI18N
         setPreferredSize(new java.awt.Dimension(700, 500));
@@ -66,28 +67,37 @@ public class WindowEditor extends javax.swing.JFrame
 
         ContenedorPrincipal.setLayout(new java.awt.BorderLayout());
 
-        titulo.setBackground(new java.awt.Color(0, 102, 153));
-        titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        titulo.setForeground(new java.awt.Color(255, 255, 255));
-        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("EDITOR SOURCE");
-        titulo.setToolTipText("Descripcion");
-        titulo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        titulo.setOpaque(true);
-        ContenedorPrincipal.add(titulo, java.awt.BorderLayout.PAGE_START);
-
         editor.setColumns(20);
         editor.setRows(5);
         scrollEditor.setViewportView(editor);
 
         ContenedorPrincipal.add(scrollEditor, java.awt.BorderLayout.CENTER);
 
+        panelStatus.setBorder(null);
         panelStatus.setLayout(new java.awt.BorderLayout());
 
+        status.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        status.setForeground(new java.awt.Color(0, 51, 51));
         status.setText(" ");
+        status.setOpaque(true);
         panelStatus.add(status, java.awt.BorderLayout.LINE_END);
 
         ContenedorPrincipal.add(panelStatus, java.awt.BorderLayout.PAGE_END);
+
+        menuToolbar.setRollover(true);
+
+        buttonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/saveFile.png"))); // NOI18N
+        buttonSave.setToolTipText("Save File");
+        buttonSave.setBorder(null);
+        buttonSave.setBorderPainted(false);
+        buttonSave.setContentAreaFilled(false);
+        buttonSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonSave.setFocusable(false);
+        buttonSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        menuToolbar.add(buttonSave);
+
+        ContenedorPrincipal.add(menuToolbar, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(ContenedorPrincipal, java.awt.BorderLayout.CENTER);
 
@@ -95,17 +105,20 @@ public class WindowEditor extends javax.swing.JFrame
         menuPrincipal.setForeground(new java.awt.Color(51, 51, 51));
         menuPrincipal.setOpaque(true);
 
-        fileMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/OpenFile.png"))); // NOI18N
+        fileMenu.setForeground(new java.awt.Color(0, 51, 51));
         fileMenu.setText("File");
+        fileMenu.setOpaque(true);
 
         itemNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         itemNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document.png"))); // NOI18N
         itemNew.setText("Nuevo");
+        itemNew.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fileMenu.add(itemNew);
 
         itemSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         itemSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/saveFile.png"))); // NOI18N
         itemSave.setText("Guardar");
+        itemSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fileMenu.add(itemSave);
 
         menuPrincipal.add(fileMenu);
@@ -127,14 +140,15 @@ public class WindowEditor extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContenedorPrincipal;
     private javax.swing.JMenu Menu;
+    private javax.swing.JButton buttonSave;
     private javax.swing.JTextArea editor;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuItem itemNew;
     private javax.swing.JMenuItem itemSave;
     private javax.swing.JMenuBar menuPrincipal;
+    private javax.swing.JToolBar menuToolbar;
     private javax.swing.JPanel panelStatus;
     private javax.swing.JScrollPane scrollEditor;
     private javax.swing.JLabel status;
-    private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }
