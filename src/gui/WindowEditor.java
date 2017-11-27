@@ -3,10 +3,12 @@ package gui;
 
 import controllers.TextLineNumber;
 import javax.swing.event.CaretListener;
+import javax.swing.text.StyledDocument;
 
 public class WindowEditor extends javax.swing.JFrame 
 {
     private TextLineNumber lineNumberAspect;
+    private StyledDocument textEditorDoc;
     /**
      * Creates new form WindowEditor
      */
@@ -17,37 +19,29 @@ public class WindowEditor extends javax.swing.JFrame
            iconApp();
     }
     
-     public void updateStatus(final int linea, final int columna) 
+     public void updateStatus( final int linea ) 
     {
         status.setText(new StringBuffer("LINEA: ")
                                                             .append(linea)
-                                                            .append(" COLUMNA: ")
-                                                            .append(columna)
                                                             .toString());
     }
      
-    public void addCarentEventListener(CaretListener event)
-    {
-        this.editor.addCaretListener( event );
-    }
+    public void addCarentEventListener(CaretListener event) { this.editor.addCaretListener( event ); }
    
-     public void windowCenterPosition()
-    {
-        this.setLocationRelativeTo( null );
-    }
-    
+    public void windowCenterPosition(){ this.setLocationRelativeTo( null ); }
+     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         Menu = new javax.swing.JMenu();
         ContenedorPrincipal = new javax.swing.JPanel();
-        scrollEditor = new javax.swing.JScrollPane();
-        editor = new javax.swing.JTextArea();
         panelStatus = new javax.swing.JPanel();
         status = new javax.swing.JLabel();
         menuToolbar = new javax.swing.JToolBar();
         buttonSave = new javax.swing.JButton();
+        scrollEditor = new javax.swing.JScrollPane();
+        editor = new javax.swing.JTextPane();
         menuPrincipal = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         itemNew = new javax.swing.JMenuItem();
@@ -66,12 +60,6 @@ public class WindowEditor extends javax.swing.JFrame
         setSize(new java.awt.Dimension(700, 500));
 
         ContenedorPrincipal.setLayout(new java.awt.BorderLayout());
-
-        editor.setColumns(20);
-        editor.setRows(5);
-        scrollEditor.setViewportView(editor);
-
-        ContenedorPrincipal.add(scrollEditor, java.awt.BorderLayout.CENTER);
 
         panelStatus.setBorder(null);
         panelStatus.setLayout(new java.awt.BorderLayout());
@@ -98,6 +86,10 @@ public class WindowEditor extends javax.swing.JFrame
         menuToolbar.add(buttonSave);
 
         ContenedorPrincipal.add(menuToolbar, java.awt.BorderLayout.PAGE_START);
+
+        scrollEditor.setViewportView(editor);
+
+        ContenedorPrincipal.add(scrollEditor, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(ContenedorPrincipal, java.awt.BorderLayout.CENTER);
 
@@ -141,7 +133,7 @@ public class WindowEditor extends javax.swing.JFrame
     private javax.swing.JPanel ContenedorPrincipal;
     private javax.swing.JMenu Menu;
     private javax.swing.JButton buttonSave;
-    private javax.swing.JTextArea editor;
+    private javax.swing.JTextPane editor;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuItem itemNew;
     private javax.swing.JMenuItem itemSave;
