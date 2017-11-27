@@ -12,45 +12,41 @@ import javax.swing.text.BadLocationException;
  */
 public class windowEditorController implements IUpdateStatusConsole 
 {
+
     final private WindowEditor editorView;
-    
-    public windowEditorController(WindowEditor view ) throws Exception
+
+    public windowEditorController(WindowEditor view) throws Exception
     {
-        editorView=view; 
+        editorView = view;
         addCarentEventListener();
         editorView.windowCenterPosition();
     }
-    
-    public void showWindowEditor( final boolean isVisible )
-    {
-        editorView.setVisible( isVisible );
-    }
-    
+
     @Override
-    public void caretUpdate(CaretEvent e) 
-    {
+    public void caretUpdate(CaretEvent e) {
+        editorView.updateStatus( calculatePositionLine(e) );
+    }
+
+    private int calculatePositionLine( final CaretEvent e) {
         JTextPane component = (JTextPane) e.getSource();
-
-        int coordenateY = calculateCoordenateInComponentY( component, component.getCaretPosition() );
-        int lineHeight = component.getFontMetrics( component.getFont() ).getHeight();
-        int posLine= (coordenateY / lineHeight) + 1;      
-
-        editorView.updateStatus( posLine );
+        int coordenateY = calculateCoordenateInComponentY(component, component.getCaretPosition());
+        int lineHeight = component.getFontMetrics(component.getFont()).getHeight();
+        return ( coordenateY / lineHeight ) + 1;
     }
-    
-    private void addCarentEventListener()
+
+    private int calculateCoordenateInComponentY(final JTextPane component, final int caretPosition) 
     {
-        editorView.addCarentEventListener(this);
-    }
-    
-    private int calculateCoordenateInComponentY(JTextPane component, int caretPosition )
-    {
-        int y=0;
-         try {
-            Rectangle caretCoords = component.modelToView(caretPosition);
+        int y = 0;
+        try {
+            Rectangle caretCoords = component.modelToView( caretPosition );
             y = (int) caretCoords.getY();
         } catch (BadLocationException ex) {
         }
-         return y;
+        return y;
     }
+
+    private void addCarentEventListener() { editorView.addCarentEventListener(this);    }
+    
+    public void showWindowEditor(final boolean isVisible) { editorView.setVisible(isVisible); }
+
 }
