@@ -1,4 +1,7 @@
 package controllers;
+import controllers.buttons.RedoButtonListener;
+import controllers.buttons.SaveButtonListener;
+import controllers.buttons.UndoButtonListener;
 import controllers.colorSyntax.ColorSyntax;
 import controllers.status.StatusConsole;
 import gui.WindowEditor;
@@ -28,5 +31,8 @@ public class windowEditorController
     {
         statusLine=new StatusConsole( view );
         styleColor = new ColorSyntax( view );
+        editorView.addEventListenerRedo( new RedoButtonListener( view ) );
+        editorView.addEventListenerSave( new SaveButtonListener( view ) );
+        editorView.addEventListenerUndo( new UndoButtonListener( view ) );
     }
 }

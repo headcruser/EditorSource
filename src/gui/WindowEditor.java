@@ -2,6 +2,9 @@
 package gui;
 
 import controllers.TextLineNumber;
+import controllers.memento.CareTaker;
+import controllers.memento.Originator;
+import java.awt.event.ActionListener;
 import javax.swing.event.CaretListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.StyledDocument;
@@ -10,6 +13,10 @@ public class WindowEditor extends javax.swing.JFrame
 {
     private TextLineNumber lineNumberAspect;
     private final StyledDocument styleTextForDocument;
+    private final CareTaker careTaker;
+    private final Originator originator;
+    private int saveFiles = 0, currentArticle = 0;
+    
     /**
      * Creates new form WindowEditor
      */
@@ -19,6 +26,9 @@ public class WindowEditor extends javax.swing.JFrame
            initTextLineAspect();
            iconApp();
            styleTextForDocument = editor.getStyledDocument();
+           careTaker=new CareTaker();
+           originator=new Originator();
+           
     }
     
      public void updateStatus( final int linea ) 
@@ -28,8 +38,6 @@ public class WindowEditor extends javax.swing.JFrame
                                                             .toString());
     }
      
-    public void addCarentEventListener(CaretListener event) { this.editor.addCaretListener( event ); }
-   
     public void windowCenterPosition(){ this.setLocationRelativeTo( null ); }
     
     public  void setAttributesForStyleDoc( int i, int length, AttributeSet atribS ,  boolean bold)
@@ -37,9 +45,41 @@ public class WindowEditor extends javax.swing.JFrame
         styleTextForDocument.setCharacterAttributes( length, length, atribS, bold );   
     }
     
-    public String getTextCode(){ return editor.getText();}
+    public String getTextCode(){ return editor.getText();}    
     
     public javax.swing.JTextPane getAreaEditor(){ return editor; }
+    
+    //Events
+    public void addCarentEventListener(CaretListener event) { this.editor.addCaretListener( event ); }
+    
+    public void addEventListenerSave(ActionListener saveListener){ this.buttonSave.addActionListener( saveListener );}
+    
+    public void addEventListenerUndo(ActionListener saveListener){ this.buttonUndo.addActionListener( saveListener );}
+    
+    public void addEventListenerRedo(ActionListener saveListener){ this.buttonRedo.addActionListener( saveListener );}
+    
+   // Actions Elements
+    public CareTaker getCareTaker() { return careTaker; }
+
+    public Originator getOriginator() { return originator;}
+
+    public void  increaseSaveFiles() { saveFiles ++; }
+
+    public void increaseArticle() { currentArticle++ ;}
+    
+    public void  decreaseSaveFiles() { saveFiles --; }
+
+    public void decreaseArticle() { currentArticle-- ;}
+    
+    public int getSaveFiles() {   return saveFiles;}
+
+    public int getCurrentArticle() {    return currentArticle;  }
+    
+    public void enableUndoButton(final boolean enable ){ buttonUndo.setEnabled(enable); }
+    
+    public void enableRedoButton(final boolean enable ){ buttonRedo.setEnabled(enable);}
+    
+    public void enableSaveButton(final boolean enable ) { buttonSave.setEnabled(enable);}
      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -51,6 +91,8 @@ public class WindowEditor extends javax.swing.JFrame
         status = new javax.swing.JLabel();
         menuToolbar = new javax.swing.JToolBar();
         buttonSave = new javax.swing.JButton();
+        buttonUndo = new javax.swing.JButton();
+        buttonRedo = new javax.swing.JButton();
         scrollEditor = new javax.swing.JScrollPane();
         editor = new javax.swing.JTextPane();
         menuPrincipal = new javax.swing.JMenuBar();
@@ -95,6 +137,28 @@ public class WindowEditor extends javax.swing.JFrame
         buttonSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         menuToolbar.add(buttonSave);
+
+        buttonUndo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/undo.png"))); // NOI18N
+        buttonUndo.setToolTipText("undo");
+        buttonUndo.setBorder(null);
+        buttonUndo.setBorderPainted(false);
+        buttonUndo.setContentAreaFilled(false);
+        buttonUndo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonUndo.setFocusable(false);
+        buttonUndo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonUndo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        menuToolbar.add(buttonUndo);
+
+        buttonRedo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/redo.png"))); // NOI18N
+        buttonRedo.setToolTipText("redo");
+        buttonRedo.setBorder(null);
+        buttonRedo.setBorderPainted(false);
+        buttonRedo.setContentAreaFilled(false);
+        buttonRedo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonRedo.setFocusable(false);
+        buttonRedo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonRedo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        menuToolbar.add(buttonRedo);
 
         ContenedorPrincipal.add(menuToolbar, java.awt.BorderLayout.PAGE_START);
 
@@ -143,7 +207,9 @@ public class WindowEditor extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContenedorPrincipal;
     private javax.swing.JMenu Menu;
+    private javax.swing.JButton buttonRedo;
     private javax.swing.JButton buttonSave;
+    private javax.swing.JButton buttonUndo;
     private javax.swing.JTextPane editor;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuItem itemNew;

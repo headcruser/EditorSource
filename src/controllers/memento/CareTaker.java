@@ -11,6 +11,7 @@ public class CareTaker
     ArrayList<Memento> savedCode = new ArrayList<Memento>();
     
     public void addMemento( Memento m ){ savedCode.add( m ); }
-    public Memento getMemento(final int index){ return savedCode.get( index ) ; }
+    
+    public Memento getMemento( int index){ return savedCode.get( index ) ; }
 
 }

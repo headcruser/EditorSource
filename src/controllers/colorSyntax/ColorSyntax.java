@@ -1,6 +1,5 @@
 package controllers.colorSyntax;
 
-import controllers.status.StatusConsole;
 import gui.WindowEditor;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
