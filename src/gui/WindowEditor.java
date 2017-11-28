@@ -3,12 +3,13 @@ package gui;
 
 import controllers.TextLineNumber;
 import javax.swing.event.CaretListener;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.StyledDocument;
 
 public class WindowEditor extends javax.swing.JFrame 
 {
     private TextLineNumber lineNumberAspect;
-    private StyledDocument textEditorDoc;
+    private final StyledDocument styleTextForDocument;
     /**
      * Creates new form WindowEditor
      */
@@ -17,6 +18,7 @@ public class WindowEditor extends javax.swing.JFrame
            initComponents();
            initTextLineAspect();
            iconApp();
+           styleTextForDocument = editor.getStyledDocument();
     }
     
      public void updateStatus( final int linea ) 
@@ -29,6 +31,15 @@ public class WindowEditor extends javax.swing.JFrame
     public void addCarentEventListener(CaretListener event) { this.editor.addCaretListener( event ); }
    
     public void windowCenterPosition(){ this.setLocationRelativeTo( null ); }
+    
+    public  void setAttributesForStyleDoc( int i, int length, AttributeSet atribS ,  boolean bold)
+    {
+        styleTextForDocument.setCharacterAttributes( length, length, atribS, bold );   
+    }
+    
+    public String getTextCode(){ return editor.getText();}
+    
+    public javax.swing.JTextPane getAreaEditor(){ return editor; }
      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
