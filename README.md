@@ -10,5 +10,5 @@ It is a simple source code editor, which uses syntax highlighting for the source
 ## What is my reason for programming it, if others already exist?
 learn refactoring techniques, and mainly have fun
 
-## Pantalla principal de la aplicación
+## Window Editor Source
 ![Revisar Recurso](sources/doc/EditorSourceWindow.JPG)
