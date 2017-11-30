@@ -40,6 +40,4 @@ public class RedoButtonListener implements ActionListener
     private boolean saveFilesNumberValid() {
         return (viewEditor.getSaveFiles()- 1 ) > viewEditor.getCurrentArticle() ;
     }
-    
-
 }

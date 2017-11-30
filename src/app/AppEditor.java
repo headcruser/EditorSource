@@ -1,7 +1,9 @@
 package app;
 
+import controllers.files.FileManagerDialog;
 import controllers.windowEditorController;
 import gui.WindowEditor;
+import java.io.File;
 
 /**
  * Aplicación principal del editor de texto
