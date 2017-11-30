@@ -31,7 +31,7 @@ public class FileManagerDialog extends JFileChooser
    public File saveDialog(  ) throws Exception
    {
         setDialogType( SAVE_DIALOG );
-        setFileFilter( new FileNameExtensionFilter( "todos los archivos *.EDU", TYPE_FILE.txt.toString(),  TYPE_FILE.text.toString() ) );
+        setFileFilter( new FileNameExtensionFilter( "todos los archivos *.txt", TYPE_FILE.txt.toString(),  TYPE_FILE.text.toString() ) );
         
         if( ! isChooserValidDialogSave() )
            throw new Exception("Cancelar..");

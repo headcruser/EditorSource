@@ -1,0 +1,5 @@
+Es una prueba de lectura del archivo de texto 
+Para ver si la lectura funciona
+hola 
+hola 
+		hola 

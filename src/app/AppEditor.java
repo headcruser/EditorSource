@@ -1,12 +1,9 @@
 package app;
 
-import controllers.files.FileManagerDialog;
-import controllers.windowEditorController;
 import gui.WindowEditor;
-import java.io.File;
 
 /**
- * Aplicación principal del editor de texto
+ * Excecute Main App 
  * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
 public class AppEditor 
@@ -44,11 +41,11 @@ public class AppEditor
             {                
                 try 
                 {
-                    WindowEditor viewEditor = new WindowEditor();
-                    windowEditorController controller = new windowEditorController(viewEditor);
-                    controller.showWindowEditor(true);
+//                    WindowEditor viewEditor = new WindowEditor();
+//                    windowEditorController controller = new windowEditorController(viewEditor);
+//                    controller.showWindowEditor(true);
                 } catch (Exception ex) {
-                    System.out.println(ex.getMessage() );
+                    System.out.println( ex.getMessage()  );
                 }
             }
         });
