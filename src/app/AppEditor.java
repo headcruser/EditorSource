@@ -6,7 +6,7 @@ import gui.WindowEditor;
  * Excecute Main App 
  * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
-public class AppEditor 
+public class AppEditor
 {
     public static void main(String args[]) throws Exception
     {  
