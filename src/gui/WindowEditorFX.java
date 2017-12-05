@@ -32,7 +32,10 @@ import javafx.stage.Stage;
  */
 public class WindowEditorFX extends Application 
 {
-
+    private static final int HIGH= 300;
+    private static final String  TITLE= "Editor Source";
+    private static final int WIDTH= 250;
+    
     private Menu file;
     private MenuItem itemNew;
     private MenuItem itemSave;
@@ -74,19 +77,6 @@ public class WindowEditorFX extends Application
     @Override
     public void start(Stage winStage) throws Exception 
     {
-//        winStage.setTitle( "  Source Editor" );
-//        StackPane root = new StackPane();
-//        Text text = new Text(" My Editor Source");
-//        root.getChildren().add( text );
-//        
-//        Scene scene = new Scene( root, 400, 400 );
-//        winStage.setScene( scene );
-//        winStage.setResizable( false );
-//        //winStage.setFullScreen(true);
-//        winStage.setOpacity( 0.5 );
-//        winStage.initStyle(StageStyle.UTILITY );
-//        winStage.show();
-
         //Root Node 
         BorderPane root = new BorderPane();
         //Menu Bar 
@@ -110,7 +100,7 @@ public class WindowEditorFX extends Application
         tab.setContent(root.getCenter());
         tab.setText("ArchivoEjemplo.txt");
         
-         GridPane gridpane = new GridPane();
+        GridPane gridpane = new GridPane();
         gridpane.setPadding( new Insets(5) );
         gridpane.setHgap(10);
         gridpane.setVgap(10);
@@ -139,36 +129,16 @@ public class WindowEditorFX extends Application
 
         menuBar.getMenus().addAll(file, edit, format, help);
 
-        root.setTop(menuBar);
-        root.setCenter(tabPane);
+        root.setTop( menuBar );
+        root.setCenter( tabPane );
 
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene( root,  HIGH , WIDTH );
         
         
-        itemClose.setOnAction( new EventHandler<ActionEvent>() 
-        {
-            @Override
-            public void handle(ActionEvent arg0) 
-            {
-                Platform.exit();
-            }
-        });
-        
-        itemSave .setOnAction( new EventHandler<ActionEvent>() 
-        {
-            @Override
-            public void handle(ActionEvent arg0) 
-            {
-                FileChooser fileChooser = new FileChooser();
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-                fileChooser.getExtensionFilters().add(extFilter);
-                File file = fileChooser.showSaveDialog(winStage);
-                System.out.println(file);
-                
-            }
-        });
+        itemClose.setOnAction( closeWindow() );
+        itemSave .setOnAction( saveDialog( ) );
        
-        winStage.setTitle(" Editor Source");
+        winStage.setTitle( TITLE );
         winStage.setScene(scene);
         winStage.setOpacity( 0.9  );
         winStage.show();
@@ -234,5 +204,34 @@ public class WindowEditorFX extends Application
     {
         tabPane = new TabPane();
         tab = new Tab();
+    }
+    
+    private EventHandler<ActionEvent> saveDialog()
+    {
+        return new EventHandler<ActionEvent>() 
+        {
+            @Override
+            public void handle(ActionEvent arg0) 
+            {
+                FileChooser fileChooser = new FileChooser();
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+                fileChooser.getExtensionFilters().add(extFilter);
+                File file = fileChooser.showSaveDialog( null );
+                System.out.println(file);
+                
+            }
+        }; 
+    }
+    
+    private EventHandler<ActionEvent> closeWindow()
+    {
+        return new EventHandler<ActionEvent>() 
+           {
+               @Override
+               public void handle(ActionEvent arg0) 
+               {
+                   Platform.exit();
+               }
+           };
     }
 }
