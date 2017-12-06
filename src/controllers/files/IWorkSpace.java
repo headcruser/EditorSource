@@ -7,5 +7,4 @@
 interface IWorkSpace 
 {
     public static final String WORKSPACE=".\\sources\\workspace\\";
-    
 }

@@ -4,16 +4,15 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class FileManagerDialog extends JFileChooser
+public class FileManagerDialog extends JFileChooser implements IActionDialog
 {
-    private enum TYPE_FILE 
+    
+    public FileManagerDialog() 
     {
-        txt,text
-     }
-    public FileManagerDialog() {
-        super(".");
+        super( MAIN_DIRECTORY );
     }
     
+    @Override
     public File openDialog() throws Exception
     {
         setDialogType ( OPEN_DIALOG  );
@@ -28,6 +27,7 @@ public class FileManagerDialog extends JFileChooser
            return getSelectedFile();     
     }
 
+    @Override
    public File saveDialog(  ) throws Exception
    {
         setDialogType( SAVE_DIALOG );

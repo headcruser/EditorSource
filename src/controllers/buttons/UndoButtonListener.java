@@ -2,13 +2,12 @@ package controllers.buttons;
 
 import gui.WindowEditor;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Listener for Button Undo
  * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
-public class UndoButtonListener implements ActionListener
+public class UndoButtonListener extends ButtonListener
 {
      private final WindowEditor viewEditor;
      private static final int MINIMAL_ARTICLE = 1;

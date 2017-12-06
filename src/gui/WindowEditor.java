@@ -2,6 +2,7 @@
 package gui;
 
 import controllers.TextLineNumber;
+import controllers.files.FileManagerDialog;
 import controllers.memento.CareTaker;
 import controllers.memento.Originator;
 import java.awt.event.ActionListener;
@@ -28,6 +29,7 @@ public class WindowEditor extends javax.swing.JFrame
            styleTextForDocument = editor.getStyledDocument();
            careTaker=new CareTaker();
            originator=new Originator();
+           editor.setEditable(false);
            
     }
     
@@ -52,11 +54,11 @@ public class WindowEditor extends javax.swing.JFrame
     //Events
     public void addCarentEventListener(CaretListener event) { this.editor.addCaretListener( event ); }
     
-    public void addEventListenerSave(ActionListener saveListener){ this.buttonSave.addActionListener( saveListener );}
+    public void addEventListenerSave( ActionListener saveListener ){ this.buttonSave.addActionListener( saveListener );}
     
-    public void addEventListenerUndo(ActionListener saveListener){ this.buttonUndo.addActionListener( saveListener );}
+    public void addEventListenerUndo( ActionListener saveListener ){ this.buttonUndo.addActionListener( saveListener );}
     
-    public void addEventListenerRedo(ActionListener saveListener){ this.buttonRedo.addActionListener( saveListener );}
+    public void addEventListenerRedo( ActionListener saveListener ){ this.buttonRedo.addActionListener( saveListener );}
     
    // Actions Elements
     public CareTaker getCareTaker() { return careTaker; }
@@ -99,6 +101,7 @@ public class WindowEditor extends javax.swing.JFrame
         fileMenu = new javax.swing.JMenu();
         itemNew = new javax.swing.JMenuItem();
         itemSave = new javax.swing.JMenuItem();
+        itemOpen = new javax.swing.JMenuItem();
 
         Menu.setBackground(new java.awt.Color(0, 0, 0));
         Menu.setText("jMenu1");
@@ -180,6 +183,11 @@ public class WindowEditor extends javax.swing.JFrame
         itemNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document.png"))); // NOI18N
         itemNew.setText("Nuevo");
         itemNew.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        itemNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemNewActionPerformed(evt);
+            }
+        });
         fileMenu.add(itemNew);
 
         itemSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
@@ -188,12 +196,36 @@ public class WindowEditor extends javax.swing.JFrame
         itemSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fileMenu.add(itemSave);
 
+        itemOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        itemOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/folder.png"))); // NOI18N
+        itemOpen.setText("Abrir");
+        itemOpen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        itemOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemOpenActionPerformed(evt);
+            }
+        });
+        fileMenu.add(itemOpen);
+
         menuPrincipal.add(fileMenu);
 
         setJMenuBar(menuPrincipal);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void itemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOpenActionPerformed
+      try {
+            new FileManagerDialog().openDialog();
+        } catch (Exception ex) {
+            System.out.println( ex.getMessage() );
+        }
+    }//GEN-LAST:event_itemOpenActionPerformed
+
+    private void itemNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNewActionPerformed
+     editor.setEditable( true );
+     editor.requestFocus();
+    }//GEN-LAST:event_itemNewActionPerformed
 
     private void initTextLineAspect()
     {
@@ -213,6 +245,7 @@ public class WindowEditor extends javax.swing.JFrame
     private javax.swing.JTextPane editor;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuItem itemNew;
+    private javax.swing.JMenuItem itemOpen;
     private javax.swing.JMenuItem itemSave;
     private javax.swing.JMenuBar menuPrincipal;
     private javax.swing.JToolBar menuToolbar;
