@@ -1,6 +1,6 @@
 package controllers.buttons;
 
-import gui.WindowEditor;
+import controllers.windowEditorController;
 import java.awt.event.ActionEvent;
 
 /**
@@ -9,37 +9,37 @@ import java.awt.event.ActionEvent;
  */
 public class UndoButtonListener extends ButtonListener
 {
-     private final WindowEditor viewEditor;
-     private static final int MINIMAL_ARTICLE = 1;
+     private final windowEditorController wController;
 
-    public UndoButtonListener(WindowEditor viewEdirtor) {
-        this.viewEditor = viewEdirtor;
-        viewEditor.enableUndoButton( false );
+    public UndoButtonListener( windowEditorController viewEdirtor ) 
+    {
+        this.wController = viewEdirtor;
+        wController.getView().enableUndoButton( false );
     }
     
-
     @Override
-    public void actionPerformed(ActionEvent e) 
+    public void actionPerformed(ActionEvent event) 
     {
         if (!  articleNumberValid() )
         {
-            viewEditor.enableUndoButton( false );
+            wController.getView().enableUndoButton( false );
             return;
         }
         
-        viewEditor.decreaseArticle();
-            String codeBoxString= viewEditor.getOriginator().
-                    RestoreFromMemento( viewEditor.getCareTaker().
-                            getMemento( viewEditor.getCurrentArticle() ) );
-            
-            viewEditor.getAreaEditor().setText(codeBoxString);
-            viewEditor.enableRedoButton( true );
-            
-        
+        wController.decreaseArticle();            
+        wController.getView().getAreaEditor().setText( getBoxString() );
+        wController.getView().enableRedoButton( true );
+    }
+
+    private String getBoxString() 
+    {
+        String codeBoxString= wController.getOriginator().
+                RestoreFromMemento( wController.getCareTaker().
+                        getMemento( wController.getCurrentArticle() ) );
+        return codeBoxString;
     }
     
     private boolean articleNumberValid(){
-        return viewEditor.getCurrentArticle() >=MINIMAL_ARTICLE;
+        return wController.getCurrentArticle() >=MINIMAL_ARTICLE;
     }
-
 }

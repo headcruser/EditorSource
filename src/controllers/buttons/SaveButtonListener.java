@@ -1,7 +1,6 @@
 package controllers.buttons;
 
-import controllers.files.FileManagerDialog;
-import gui.WindowEditor;
+import controllers.windowEditorController;
 import java.awt.event.ActionEvent;
 
 /**
@@ -10,22 +9,21 @@ import java.awt.event.ActionEvent;
  */
 public class SaveButtonListener extends ButtonListener
 {
-    private final WindowEditor viewEditor;
+    private final windowEditorController wController;
 
-    public SaveButtonListener(WindowEditor viewEdirtor) 
+    public SaveButtonListener(windowEditorController controller) 
     {
-        this.viewEditor = viewEdirtor;        
+        this.wController = controller;       
     }
     
     @Override
-    public void actionPerformed(ActionEvent e) 
+    public void actionPerformed(ActionEvent event) 
     {
-        String codeInTextCode=viewEditor.getTextCode();        
-        viewEditor.getOriginator().set( codeInTextCode );        
-        viewEditor.getCareTaker().addMemento( viewEditor.getOriginator().storeInMomento() );
-        viewEditor.increaseArticle();
-        viewEditor.increaseSaveFiles();
-        viewEditor.enableUndoButton( true );        
+        String codeInTextCode=wController.getView().getTextCode();        
+        wController.getOriginator().set( codeInTextCode );        
+        wController.getCareTaker().addMemento( wController.getOriginator().storeInMomento() );
+        wController.increaseArticle();
+        wController.increaseSaveFiles();
+        wController.getView().enableUndoButton( true );        
     }
-
 }

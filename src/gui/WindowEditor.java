@@ -1,22 +1,17 @@
 
 package gui;
 
-import controllers.TextLineNumber;
-import controllers.files.FileManagerDialog;
-import controllers.memento.CareTaker;
-import controllers.memento.Originator;
+import java.awt.Component;
 import java.awt.event.ActionListener;
 import javax.swing.event.CaretListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.StyledDocument;
 
-public class WindowEditor extends javax.swing.JFrame 
+public final class WindowEditor extends javax.swing.JFrame 
 {
-    private TextLineNumber lineNumberAspect;
-    private final StyledDocument styleTextForDocument;
-    private final CareTaker careTaker;
-    private final Originator originator;
-    private int saveFiles = 0, currentArticle = 0;
+    private StyledDocument styleTextForDocument;
+  
+    public static final String ICON_LOGO="/icons/logo.png";
     
     /**
      * Creates new form WindowEditor
@@ -24,64 +19,53 @@ public class WindowEditor extends javax.swing.JFrame
     public WindowEditor() 
     {
            initComponents();
-           initTextLineAspect();
-           iconApp();
-           styleTextForDocument = editor.getStyledDocument();
-           careTaker=new CareTaker();
-           originator=new Originator();
-           editor.setEditable(false);
-           
+           assingIconApp( ICON_LOGO );
+           assignSyleDocumentEditor();           
     }
-    
-     public void updateStatus( final int linea ) 
-    {
-        status.setText(new StringBuffer("LINEA: ")
-                                                            .append(linea)
-                                                            .toString());
-    }
-     
+
     public void windowCenterPosition(){ this.setLocationRelativeTo( null ); }
-    
-    public  void setAttributesForStyleDoc( int i, int length, AttributeSet atribS ,  boolean bold)
-    {
-        styleTextForDocument.setCharacterAttributes( length, length, atribS, bold );   
-    }
-    
-    public String getTextCode(){ return editor.getText();}    
-    
-    public javax.swing.JTextPane getAreaEditor(){ return editor; }
-    
-    //Events
+      
     public void addCarentEventListener(CaretListener event) { this.editor.addCaretListener( event ); }
     
     public void addEventListenerSave( ActionListener saveListener ){ this.buttonSave.addActionListener( saveListener );}
     
-    public void addEventListenerUndo( ActionListener saveListener ){ this.buttonUndo.addActionListener( saveListener );}
+    public void addEventListenerUndo( ActionListener undoListener ){ this.buttonUndo.addActionListener( undoListener );}
     
-    public void addEventListenerRedo( ActionListener saveListener ){ this.buttonRedo.addActionListener( saveListener );}
+    public void addEventListenerRedo( ActionListener redoListener ){ this.buttonRedo.addActionListener( redoListener );}
     
-   // Actions Elements
-    public CareTaker getCareTaker() { return careTaker; }
-
-    public Originator getOriginator() { return originator;}
-
-    public void  increaseSaveFiles() { saveFiles ++; }
-
-    public void increaseArticle() { currentArticle++ ;}
-    
-    public void  decreaseSaveFiles() { saveFiles --; }
-
-    public void decreaseArticle() { currentArticle-- ;}
-    
-    public int getSaveFiles() {   return saveFiles;}
-
-    public int getCurrentArticle() {    return currentArticle;  }
-    
+    public void addEventListenerNewFile (ActionListener  newFileListener){ this.itemNew.addActionListener( newFileListener );}
+     
     public void enableUndoButton(final boolean enable ){ buttonUndo.setEnabled(enable); }
     
     public void enableRedoButton(final boolean enable ){ buttonRedo.setEnabled(enable);}
     
     public void enableSaveButton(final boolean enable ) { buttonSave.setEnabled(enable);}
+    
+    public void isEditorEditable( final boolean status) {   editor.setEditable(status ); }
+    
+    public String getTextCode(){ return editor.getText();}    
+    
+    public javax.swing.JTextPane getAreaEditor(){ return editor; }
+    
+    public void updateStatus( final int linea ) {   
+        status.setText( new StringBuffer( "LINEA: " ).append( linea ).toString()); 
+    }
+    
+     public  void setAttributesForStyleDoc( int i, int length, AttributeSet atribS ,  boolean bold) {
+        styleTextForDocument.setCharacterAttributes( length, length, atribS, bold );   
+    }
+     
+     public void initTextLineAspect( Component LineText ){
+        scrollEditor.setRowHeaderView( LineText );
+    }
+    
+    public void assingIconApp( final String  nameIcon ){ 
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource( nameIcon ) ).getImage()); 
+    }
+    
+    private void assignSyleDocumentEditor() { 
+        styleTextForDocument = editor.getStyledDocument(); 
+    }
      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -183,11 +167,6 @@ public class WindowEditor extends javax.swing.JFrame
         itemNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document.png"))); // NOI18N
         itemNew.setText("Nuevo");
         itemNew.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        itemNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemNewActionPerformed(evt);
-            }
-        });
         fileMenu.add(itemNew);
 
         itemSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
@@ -200,11 +179,6 @@ public class WindowEditor extends javax.swing.JFrame
         itemOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/folder.png"))); // NOI18N
         itemOpen.setText("Abrir");
         itemOpen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        itemOpen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemOpenActionPerformed(evt);
-            }
-        });
         fileMenu.add(itemOpen);
 
         menuPrincipal.add(fileMenu);
@@ -214,28 +188,6 @@ public class WindowEditor extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void itemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOpenActionPerformed
-      try {
-            new FileManagerDialog().openDialog();
-        } catch (Exception ex) {
-            System.out.println( ex.getMessage() );
-        }
-    }//GEN-LAST:event_itemOpenActionPerformed
-
-    private void itemNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNewActionPerformed
-     editor.setEditable( true );
-     editor.requestFocus();
-    }//GEN-LAST:event_itemNewActionPerformed
-
-    private void initTextLineAspect()
-    {
-        lineNumberAspect= new TextLineNumber(editor);
-        scrollEditor.setRowHeaderView( lineNumberAspect );
-    }
-    
-    private void iconApp(){
-        setIconImage(new javax.swing.ImageIcon(getClass().getResource( "/icons/logo.png") ).getImage());
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContenedorPrincipal;
     private javax.swing.JMenu Menu;

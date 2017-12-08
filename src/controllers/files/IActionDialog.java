@@ -4,7 +4,7 @@ import java.io.File;
 
 /**
  * Actions for window Manager Dialog 
- * @autor Daniel Martinez Sierra 
+ * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
 interface IActionDialog 
 {

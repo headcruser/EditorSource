@@ -1,6 +1,6 @@
 package controllers.buttons;
 
-import gui.WindowEditor;
+import controllers.windowEditorController;
 import java.awt.event.ActionEvent;
 
 /**
@@ -9,30 +9,33 @@ import java.awt.event.ActionEvent;
  */
 public class RedoButtonListener extends ButtonListener
 {
-    private final WindowEditor viewEditor;
+    private final windowEditorController wcontroller;
 
-    public RedoButtonListener(WindowEditor viewEditor) {
-        this.viewEditor = viewEditor;
-        viewEditor.enableRedoButton( false );
+    public RedoButtonListener(windowEditorController viewEditor) {
+        this.wcontroller = viewEditor;
+        viewEditor.getView().enableRedoButton( false );
     }    
     
     @Override
-    public void actionPerformed( ActionEvent e ) 
+    public void actionPerformed( ActionEvent event ) 
     {
         if (!  saveFilesNumberValid() ){
-            viewEditor.enableRedoButton( false );
+            wcontroller.getView().enableRedoButton( false );
             return;
         }
            
-        viewEditor.increaseArticle();
+        wcontroller.increaseArticle();
         
-            String codeBoxString= viewEditor.getOriginator().
-                    RestoreFromMemento( viewEditor.getCareTaker().
-                            getMemento( viewEditor.getCurrentArticle() ) );
+            String codeBoxString= wcontroller.getOriginator().
+                    RestoreFromMemento( wcontroller.getCareTaker().
+                            getMemento( wcontroller.getCurrentArticle() ) );
             
-            viewEditor.getAreaEditor().setText(codeBoxString);
-            viewEditor.enableUndoButton( true );
+            wcontroller.getView().getAreaEditor().setText(codeBoxString);
+            wcontroller.getView().enableUndoButton( true );
     }
 
-    private boolean saveFilesNumberValid() { return (viewEditor.getSaveFiles()- 1 ) > viewEditor.getCurrentArticle() ;}
+    private boolean saveFilesNumberValid() 
+    {
+        return ( wcontroller.getSaveFiles() - MINIMAL_ARTICLE ) > wcontroller.getCurrentArticle() ;
+    }
 }

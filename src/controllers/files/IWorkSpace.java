@@ -2,7 +2,7 @@
 
 /**
  * Delimiters Folder Work
- * @author Daniel Martinez 
+ * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
 interface IWorkSpace 
 {

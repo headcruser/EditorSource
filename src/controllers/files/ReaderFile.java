@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 /**
  * Reader Content to Files
- * 
+ * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
 public class ReaderFile implements IReader, IWorkSpace
 {
