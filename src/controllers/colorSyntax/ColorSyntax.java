@@ -21,8 +21,10 @@ public class ColorSyntax extends KeyAdapter
     public ColorSyntax(WindowEditor view) 
     {
         editorView = view;
-        editorView.getAreaEditor().addKeyListener(this);
+        assingEvent();
     }
+
+    private void assingEvent() { editorView.getAreaEditor().addKeyListener( this ); }
 
     private void updateColorText( int i,  int length,  Color c,  boolean bold )
     {

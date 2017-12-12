@@ -14,7 +14,7 @@ import java.util.Scanner;
  * This Class Can Writter In File Text
  * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
-public class WritterInFile implements IWritter, IWorkSpace
+public class WritterInFile implements IWritter, IPathFiles
 {         
     private final String nameFile;
     

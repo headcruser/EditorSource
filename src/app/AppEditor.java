@@ -1,5 +1,7 @@
 package app;
 
+import controllers.configFiles.Propieties;
+import controllers.console.Console;
 import controllers.windowEditorController;
 import gui.WindowEditor;
 
@@ -20,11 +22,12 @@ public class AppEditor
             {                
                 try 
                 {
-                    WindowEditor viewEditor = new WindowEditor();
-                    windowEditorController controller = new windowEditorController(viewEditor);
+                    Propieties.loader();                   
+                    windowEditorController controller = new windowEditorController( new WindowEditor() );
                     controller.showWindowEditor(true);
-                } catch (Exception ex) {
-                    System.out.println( ex.getMessage()  );
+                } catch (Exception ex) 
+                {
+                    Console.print( ex.getMessage() );
                 }
             }
         });
@@ -43,7 +46,7 @@ public class AppEditor
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WindowEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                 Console.print( ex.getMessage() );
         }
     } 
 }

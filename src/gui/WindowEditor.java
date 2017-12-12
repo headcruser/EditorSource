@@ -1,18 +1,16 @@
 
 package gui;
 
+import controllers.files.IPathFiles;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import javax.swing.event.CaretListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.StyledDocument;
 
-public final class WindowEditor extends javax.swing.JFrame 
+public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
 {
     private StyledDocument styleTextForDocument;
-  
-    public static final String ICON_LOGO="/icons/logo.png";
-    
     /**
      * Creates new form WindowEditor
      */

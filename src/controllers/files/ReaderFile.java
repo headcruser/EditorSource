@@ -9,7 +9,7 @@ import java.nio.file.Paths;
  * Reader Content to Files
  * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
-public class ReaderFile implements IReader, IWorkSpace
+public class ReaderFile implements IReader, IPathFiles
 {
     //./sources/workspace/ejemplo.txt
     private final StringBuffer contentFileText;
