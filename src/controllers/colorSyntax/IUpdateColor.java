@@ -1,12 +1,10 @@
 package controllers.colorSyntax;
 
-import java.awt.Color;
-
 /**
- *
+ * Update color for syntaxis
  * @author Daniel Martinez
  */
-interface IUpdateColor 
+public interface IUpdateColor 
 {
-    void updateColorText( int offset,  int length,  Color c,  boolean bold );
+    void updateColorText(  final String text );
 }

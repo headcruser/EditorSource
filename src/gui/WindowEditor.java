@@ -61,6 +61,8 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
         setIconImage(new javax.swing.ImageIcon(getClass().getResource( nameIcon ) ).getImage()); 
     }
     
+    public StyledDocument getStyledDocument(){ return  styleTextForDocument; }
+    
     private void assignSyleDocumentEditor() { 
         styleTextForDocument = editor.getStyledDocument(); 
     }

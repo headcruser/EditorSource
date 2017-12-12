@@ -1,24 +1,51 @@
 package controllers.colorSyntax;
 
-import java.util.regex.Matcher;
+import controllers.windowEditorController;
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
 import java.util.regex.Pattern;
+import javax.swing.SwingUtilities;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 /**
  * Abstract Class for Sintax
  * @author Daniel Martinez
  */
-public abstract class Syntax 
+public abstract class Syntax extends KeyAdapter implements IUpdateColor
 {
-    protected String  regex;
-    protected Pattern pattern;
+    protected final windowEditorController wc;
+    protected final Color sintaxColor;
+    protected Pattern expresion;
+    protected boolean bold;
     
-     public Syntax( String regexExp) 
-    {
-        regex= regexExp;
-        pattern = Pattern.compile( regex , Pattern.DOTALL);
+    public Syntax( Pattern p , final windowEditorController controller,  final Color color)  
+    { 
+        super();
+        expresion=p;
+        wc=controller;
+        sintaxColor=color;
+        bold=false;
+    }  
+    
+     protected void paintColorText(int i, int length, Color c) 
+   {
+        SimpleAttributeSet aset = new SimpleAttributeSet();
+        StyleConstants.setForeground( aset, c );
+        StyleConstants.setBold(aset, bold );
+        invokeMethod( i, length, aset, bold ); 
     }
      
-    public Matcher analizeSentence( final String match )
+    protected void assingBold( final boolean active){ bold=active; }
+
+    private void invokeMethod( int i, int length, SimpleAttributeSet aset, boolean bold) 
     {
-            return pattern.matcher( match );
-    }   
+        Runnable doHighlight = new Runnable()
+        {
+            @Override
+            public void run() {
+                wc.getView().getStyledDocument().setCharacterAttributes( i, length, aset , bold );
+            }
+        };
+        SwingUtilities.invokeLater(doHighlight);
+    }
 }

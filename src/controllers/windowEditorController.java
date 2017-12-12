@@ -3,7 +3,7 @@ import controllers.buttons.NewFile;
 import controllers.buttons.RedoButtonListener;
 import controllers.buttons.SaveButtonListener;
 import controllers.buttons.UndoButtonListener;
-import controllers.colorSyntax.ColorSyntax;
+import controllers.colorSyntax.SyntaxComments;
 import controllers.memento.CareTaker;
 import controllers.memento.Originator;
 import controllers.status.StatusConsole;
@@ -14,12 +14,11 @@ import gui.WindowEditor;
  *
  * @author Daniel Martinez <headcruser at gmail.com>
  */
-public class windowEditorController
+public final class windowEditorController
 {
 
     final private WindowEditor editorView;
     private StatusConsole statusLine;
-    private ColorSyntax styleColor;
     private CareTaker careTaker;
     private Originator originator;
     private TextLineNumber lineNumberAspect;
@@ -40,17 +39,20 @@ public class windowEditorController
     
     private void createControllers( )
     {
+        lineNumberAspect=new TextLineNumber( editorView.getAreaEditor() );
         statusLine=new StatusConsole( editorView );
-        styleColor = new ColorSyntax( editorView );
         careTaker=new CareTaker();
-        originator=new Originator();
-        
+        originator=new Originator();    
+        assingEvents( );
+    }
+
+    private void assingEvents() 
+    {
         editorView.addEventListenerRedo( new RedoButtonListener( this ) );
         editorView.addEventListenerSave( new SaveButtonListener( this ) );
         editorView.addEventListenerUndo( new UndoButtonListener( this ) );
         editorView.addEventListenerNewFile( new NewFile(  this ) );
-        
-        lineNumberAspect=new TextLineNumber( editorView.getAreaEditor() );
+        editorView.addCarentEventListener( new SyntaxComments( this) );
     }
     
     public WindowEditor getView() { return editorView;}
