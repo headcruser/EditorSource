@@ -1,8 +1,8 @@
 package controllers.colorSyntax;
 
 /**
- * Update color for syntaxis
- * @author Daniel Martinez
+ * Update color for Sintax
+ * @author Daniel Martinez  <headcruser at gmail.com>
  */
 public interface IUpdateColor 
 {

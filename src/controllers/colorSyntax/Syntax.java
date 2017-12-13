@@ -1,43 +1,27 @@
 package controllers.colorSyntax;
 
 import controllers.windowEditorController;
-import java.awt.Color;
-import java.awt.event.KeyAdapter;
 import java.util.regex.Pattern;
 import javax.swing.SwingUtilities;
+import javax.swing.event.CaretListener;
 import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
 /**
- * Abstract Class for Sintax
- * @author Daniel Martinez
+ * Define Abstract Model for Sintax
+ * @author Daniel Martinez  <headcruser at gmail.com>
  */
-public abstract class Syntax extends KeyAdapter implements IUpdateColor
+public abstract class Syntax implements IUpdateColor, CaretListener
 {
     protected final windowEditorController wc;
-    protected final Color sintaxColor;
-    protected Pattern expresion;
-    protected boolean bold;
+    protected Pattern reserved= Pattern.compile(  new LoaderWordsReserved().getRegularExpresion() );
+    protected Pattern comments= Pattern.compile("\\/\\*.*?\\*\\/",Pattern.DOTALL);
     
-    public Syntax( Pattern p , final windowEditorController controller,  final Color color)  
+    public Syntax( final windowEditorController controller)  
     { 
         super();
-        expresion=p;
         wc=controller;
-        sintaxColor=color;
-        bold=false;
     }  
-    
-     protected void paintColorText(int i, int length, Color c) 
-   {
-        SimpleAttributeSet aset = new SimpleAttributeSet();
-        StyleConstants.setForeground( aset, c );
-        StyleConstants.setBold(aset, bold );
-        invokeMethod( i, length, aset, bold ); 
-    }
-     
-    protected void assingBold( final boolean active){ bold=active; }
-
-    private void invokeMethod( int i, int length, SimpleAttributeSet aset, boolean bold) 
+  
+    protected final void updateComponent( int i, int length, SimpleAttributeSet aset, boolean bold) 
     {
         Runnable doHighlight = new Runnable()
         {
@@ -48,4 +32,6 @@ public abstract class Syntax extends KeyAdapter implements IUpdateColor
         };
         SwingUtilities.invokeLater(doHighlight);
     }
+    
+    public abstract void clearColors();
 }

@@ -3,7 +3,7 @@ import controllers.buttons.NewFile;
 import controllers.buttons.RedoButtonListener;
 import controllers.buttons.SaveButtonListener;
 import controllers.buttons.UndoButtonListener;
-import controllers.colorSyntax.SyntaxComments;
+import controllers.colorSyntax.PaintColorSyntax;
 import controllers.memento.CareTaker;
 import controllers.memento.Originator;
 import controllers.status.StatusConsole;
@@ -48,11 +48,12 @@ public final class windowEditorController
 
     private void assingEvents() 
     {
+        editorView.addCarentEventListener(new PaintColorSyntax( this ) );
         editorView.addEventListenerRedo( new RedoButtonListener( this ) );
         editorView.addEventListenerSave( new SaveButtonListener( this ) );
         editorView.addEventListenerUndo( new UndoButtonListener( this ) );
         editorView.addEventListenerNewFile( new NewFile(  this ) );
-        editorView.addCarentEventListener( new SyntaxComments( this) );
+        
     }
     
     public WindowEditor getView() { return editorView;}

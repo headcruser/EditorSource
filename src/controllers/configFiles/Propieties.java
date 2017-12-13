@@ -5,7 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-
+/**
+ * Loader Properties for the system
+ * @author Daniel Martinez  <headcruser at gmail.com>
+ */
 public final class Propieties implements IPathFiles
 {
     private Propieties() { super(); }

@@ -1,8 +1,8 @@
 package controllers.buttons;
 import java.awt.event.ActionListener;
 /**
- * Actions System
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * Actions Buttons of System
+ * @author Daniel Martinez  <headcruser at gmail.com>
  */
 abstract class ButtonListener implements ActionListener
 {
