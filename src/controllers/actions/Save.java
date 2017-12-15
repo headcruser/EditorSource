@@ -1,4 +1,4 @@
-package controllers.buttons;
+package controllers.actions;
 
 import controllers.windowEditorController;
 import java.awt.event.ActionEvent;
@@ -7,11 +7,11 @@ import java.awt.event.ActionEvent;
  * Button for Action Save Document
  * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
-public class SaveButtonListener extends ButtonListener
+public class Save extends Action
 {
     private final windowEditorController wController;
 
-    public SaveButtonListener(windowEditorController controller) 
+    public Save(windowEditorController controller) 
     {
         this.wController = controller;       
     }

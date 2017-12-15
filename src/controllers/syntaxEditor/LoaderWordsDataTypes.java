@@ -1,4 +1,4 @@
-package controllers.colorSyntax;
+package controllers.syntaxEditor;
 /**
  * Loader Data Types Words for Sintax Lenguaje
  * @author Daniel Martinez  <headcruser at gmail.com>

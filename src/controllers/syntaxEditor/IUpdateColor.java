@@ -1,4 +1,4 @@
-package controllers.colorSyntax;
+package controllers.syntaxEditor;
 
 /**
  * Update color for Sintax

@@ -1,7 +1,7 @@
 package app;
 
 import controllers.configFiles.Propieties;
-import controllers.console.Console;
+import controllers.utils.PrinterConsoleUtils;
 import controllers.windowEditorController;
 import gui.WindowEditor;
 
@@ -27,7 +27,7 @@ public class AppEditor
                     controller.showWindowEditor(true);
                 } catch (Exception ex) 
                 {
-                    Console.print( ex.getMessage() );
+                    PrinterConsoleUtils.print( ex.getMessage() );
                 }
             }
         });
@@ -46,7 +46,7 @@ public class AppEditor
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-                 Console.print( ex.getMessage() );
+                 PrinterConsoleUtils.print( ex.getMessage() );
         }
     } 
 }

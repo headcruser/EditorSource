@@ -23,15 +23,17 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
 
     public void windowCenterPosition(){ this.setLocationRelativeTo( null ); }
       
-    public void addCarentEventListener(CaretListener event) { this.editor.addCaretListener( event ); }
+    public void addSyntaxListener(CaretListener event) { this.editor.addCaretListener( event ); }
     
-    public void addEventListenerSave( ActionListener saveListener ){ this.buttonSave.addActionListener( saveListener );}
+    public void addActionSave( ActionListener saveListener ){ this.buttonSave.addActionListener( saveListener );}
     
-    public void addEventListenerUndo( ActionListener undoListener ){ this.buttonUndo.addActionListener( undoListener );}
+    public void addActionUndo( ActionListener undoListener ){ this.buttonUndo.addActionListener( undoListener );}
     
-    public void addEventListenerRedo( ActionListener redoListener ){ this.buttonRedo.addActionListener( redoListener );}
+    public void addActionRedo( ActionListener redoListener ){ this.buttonRedo.addActionListener( redoListener );}
     
-    public void addEventListenerNewFile (ActionListener  newFileListener){ this.itemNew.addActionListener( newFileListener );}
+    public void addActionNewFile (ActionListener  newFileListener){ this.itemNew.addActionListener( newFileListener );}
+    
+    public void addActionClose (ActionListener  newFileListener){ this.itemClose.addActionListener(newFileListener ); }
      
     public void enableUndoButton(final boolean enable ){ buttonUndo.setEnabled(enable); }
     
@@ -84,8 +86,23 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
         menuPrincipal = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         itemNew = new javax.swing.JMenuItem();
-        itemSave = new javax.swing.JMenuItem();
         itemOpen = new javax.swing.JMenuItem();
+        itemSave = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        itemClose = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         Menu.setBackground(new java.awt.Color(0, 0, 0));
         Menu.setText("jMenu1");
@@ -94,9 +111,9 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EditorSource");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMinimumSize(new java.awt.Dimension(400, 200));
         setName("windowApp"); // NOI18N
         setPreferredSize(new java.awt.Dimension(700, 500));
-        setResizable(false);
         setSize(new java.awt.Dimension(700, 500));
 
         ContenedorPrincipal.setLayout(new java.awt.BorderLayout());
@@ -165,23 +182,75 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
 
         itemNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         itemNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/document.png"))); // NOI18N
-        itemNew.setText("Nuevo");
+        itemNew.setText("new");
         itemNew.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fileMenu.add(itemNew);
 
-        itemSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        itemSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/saveFile.png"))); // NOI18N
-        itemSave.setText("Guardar");
-        itemSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        fileMenu.add(itemSave);
-
         itemOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         itemOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/folder.png"))); // NOI18N
-        itemOpen.setText("Abrir");
+        itemOpen.setText("open");
         itemOpen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fileMenu.add(itemOpen);
 
+        itemSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        itemSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/saveFile.png"))); // NOI18N
+        itemSave.setText("save");
+        itemSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        fileMenu.add(itemSave);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/saveFile.png"))); // NOI18N
+        jMenuItem2.setText("Save as");
+        fileMenu.add(jMenuItem2);
+        fileMenu.add(jSeparator1);
+
+        itemClose.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        itemClose.setText("Close");
+        fileMenu.add(itemClose);
+
         menuPrincipal.add(fileMenu);
+
+        jMenu1.setText("edit");
+
+        jMenuItem1.setText("find");
+        jMenu1.add(jMenuItem1);
+
+        menuPrincipal.add(jMenu1);
+
+        jMenu2.setText("options");
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("showTools");
+        jMenu2.add(jCheckBoxMenuItem1);
+
+        jCheckBoxMenuItem2.setSelected(true);
+        jCheckBoxMenuItem2.setText("state console");
+        jMenu2.add(jCheckBoxMenuItem2);
+        jMenu2.add(jSeparator2);
+
+        jMenuItem5.setText("Fonts");
+        jMenu2.add(jMenuItem5);
+
+        jMenu4.setText("themes");
+
+        jCheckBoxMenuItem3.setSelected(true);
+        jCheckBoxMenuItem3.setText("Dark");
+        jMenu4.add(jCheckBoxMenuItem3);
+
+        jCheckBoxMenuItem4.setSelected(true);
+        jCheckBoxMenuItem4.setText("Clasic");
+        jMenu4.add(jCheckBoxMenuItem4);
+
+        jMenu2.add(jMenu4);
+
+        menuPrincipal.add(jMenu2);
+
+        jMenu3.setText("help");
+
+        jMenuItem8.setText("about editor");
+        jMenu3.add(jMenuItem8);
+
+        menuPrincipal.add(jMenu3);
 
         setJMenuBar(menuPrincipal);
 
@@ -196,9 +265,24 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
     private javax.swing.JButton buttonUndo;
     private javax.swing.JTextPane editor;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenuItem itemClose;
     private javax.swing.JMenuItem itemNew;
     private javax.swing.JMenuItem itemOpen;
     private javax.swing.JMenuItem itemSave;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenuBar menuPrincipal;
     private javax.swing.JToolBar menuToolbar;
     private javax.swing.JPanel panelStatus;

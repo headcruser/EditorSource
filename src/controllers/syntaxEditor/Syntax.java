@@ -1,4 +1,4 @@
-package controllers.colorSyntax;
+package controllers.syntaxEditor;
 
 import controllers.windowEditorController;
 import java.util.regex.Pattern;

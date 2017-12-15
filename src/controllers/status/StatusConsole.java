@@ -26,5 +26,5 @@ public class StatusConsole implements CaretListener
         editorView.updateStatus( position.calculatePositionLine(e) );
     }
 
-    private void addCarentEventListener() { editorView.addCarentEventListener(this);    }
+    private void addCarentEventListener() { editorView.addSyntaxListener(this);    }
 }

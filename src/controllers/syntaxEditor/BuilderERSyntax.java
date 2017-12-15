@@ -1,4 +1,4 @@
-package controllers.colorSyntax;
+package controllers.syntaxEditor;
 
 /**
  * Actions for Loader Words for system

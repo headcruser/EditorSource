@@ -1,4 +1,4 @@
-package controllers.colorSyntax;
+package controllers.syntaxEditor;
 /**
  * Loader Reserved Words for Sintax Lenguaje
  * @author Daniel Martinez  <headcruser at gmail.com>

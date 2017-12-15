@@ -1,4 +1,4 @@
-package controllers.buttons;
+package controllers.actions;
 
 import controllers.windowEditorController;
 import java.awt.event.ActionEvent;
@@ -7,11 +7,11 @@ import java.awt.event.ActionEvent;
  * Listener for button Redo
  * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
-public class RedoButtonListener extends ButtonListener
+public class Redo extends Action
 {
     private final windowEditorController wcontroller;
 
-    public RedoButtonListener(windowEditorController viewEditor) {
+    public Redo(windowEditorController viewEditor) {
         this.wcontroller = viewEditor;
         viewEditor.getView().enableRedoButton( false );
     }    

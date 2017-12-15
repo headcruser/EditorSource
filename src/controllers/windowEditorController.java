@@ -1,9 +1,10 @@
 package controllers;
-import controllers.buttons.NewFile;
-import controllers.buttons.RedoButtonListener;
-import controllers.buttons.SaveButtonListener;
-import controllers.buttons.UndoButtonListener;
-import controllers.colorSyntax.PaintColorSyntax;
+import controllers.actions.NewFile;
+import controllers.actions.Redo;
+import controllers.actions.Save;
+import controllers.actions.Undo;
+import controllers.actions.close;
+import controllers.syntaxEditor.PaintColorSyntax;
 import controllers.memento.CareTaker;
 import controllers.memento.Originator;
 import controllers.status.StatusConsole;
@@ -48,12 +49,12 @@ public final class windowEditorController
 
     private void assingEvents() 
     {
-        editorView.addCarentEventListener(new PaintColorSyntax( this ) );
-        editorView.addEventListenerRedo( new RedoButtonListener( this ) );
-        editorView.addEventListenerSave( new SaveButtonListener( this ) );
-        editorView.addEventListenerUndo( new UndoButtonListener( this ) );
-        editorView.addEventListenerNewFile( new NewFile(  this ) );
-        
+        editorView.addSyntaxListener(new PaintColorSyntax( this ) );
+        editorView.addActionRedo(new Redo( this ) );
+        editorView.addActionSave(new Save( this ) );
+        editorView.addActionUndo(new Undo( this ) );
+        editorView.addActionNewFile( new NewFile(  this ) );
+        editorView.addActionClose( new close());
     }
     
     public WindowEditor getView() { return editorView;}

@@ -1,5 +1,5 @@
 package controllers.configFiles;
-import controllers.console.Console;
+import controllers.utils.PrinterConsoleUtils;
 import controllers.files.IPathFiles;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,6 +25,6 @@ public final class Propieties implements IPathFiles
             } catch (IOException w) {
                 throw  new IOException( " Fail Reader File Configuration" );
             }
-           Console.print( "SUCCESSFUL FILE CONFIGURATION" );
+           PrinterConsoleUtils.print( "SUCCESSFUL FILE CONFIGURATION" );
     }
 }

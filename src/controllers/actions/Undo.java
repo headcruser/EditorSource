@@ -1,4 +1,4 @@
-package controllers.buttons;
+package controllers.actions;
 
 import controllers.windowEditorController;
 import java.awt.event.ActionEvent;
@@ -7,11 +7,11 @@ import java.awt.event.ActionEvent;
  * Listener for Button Undo
  * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
-public class UndoButtonListener extends ButtonListener
+public class Undo extends Action
 {
      private final windowEditorController wController;
 
-    public UndoButtonListener( windowEditorController viewEdirtor ) 
+    public Undo( windowEditorController viewEdirtor ) 
     {
         this.wController = viewEdirtor;
         wController.getView().enableUndoButton( false );
