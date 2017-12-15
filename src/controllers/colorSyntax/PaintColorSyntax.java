@@ -29,7 +29,7 @@ public final class PaintColorSyntax extends Syntax
             paintColorText( findR.start(), findR.end() - findR.start(), Color.BLUE, true );
         
         while ( findC.find() ) 
-            paintColorText( findC.start(), findC.end() - findC.start(), Color.GRAY, true );
+            paintColorText( findC.start(), findC.end() - findC.start(), Color.GRAY, false);
     }
 
     @Override
@@ -49,6 +49,6 @@ public final class PaintColorSyntax extends Syntax
         SimpleAttributeSet aset = new SimpleAttributeSet();
         StyleConstants.setForeground( aset, c ); 
         StyleConstants.setBold( aset, bold );
-        updateComponent( i, length, aset, bold ); 
+        updateComponent( i, length, aset ); 
     }
 }
