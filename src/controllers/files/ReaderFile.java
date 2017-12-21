@@ -1,5 +1,7 @@
 package controllers.files;
+import controllers.utils.PrinterConsoleUtils;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -9,30 +11,25 @@ import java.nio.file.Paths;
  * Reader Content to Files
  * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
-public class ReaderFile implements IReader, IPathFiles
+public final class ReaderFile implements IReader, IPathFiles
 {
-    //./sources/workspace/ejemplo.txt
-    private final StringBuffer contentFileText;
-    private final String nameFile;
-    private long numLines;
-
-    public ReaderFile(String ReadToFile) 
-    {
-        contentFileText=new StringBuffer(0);
-        nameFile=ReadToFile;
-        numLines=0;
-    }
+    public ReaderFile() {   super();  }
     
     @Override
-    public void readFile() throws IOException 
-    {        
+    public String readFile(File nameFile) throws IOException {
+        return read( nameFile.getName() ); 
+    }
+    
+    private String read( String nameFile) throws IOException
+    {
+        final StringBuffer contentFileText= new StringBuffer(0);
         try (BufferedReader reader = Files.newBufferedReader( getPath( nameFile ), Charset.defaultCharset() ) ) 
         {
             String line;
             while ((line = reader.readLine()) != null) 
                 contentFileText.append(line).append("\n");
             
-            reader.close();
+            return contentFileText.toString();
         }
         catch (IOException e) 
         {
@@ -45,10 +42,10 @@ public class ReaderFile implements IReader, IPathFiles
             return  Paths.get( new StringBuilder( WORKSPACE ).append( fileToRead ).toString() );            
     }
     
-    public long numberLines()
+    public long numberLines(File nameFile)
     {
-        try (BufferedReader reader = Files.newBufferedReader( getPath( nameFile ), Charset.defaultCharset() ) )  
-        {    
+        long numLines;
+        try (BufferedReader reader = Files.newBufferedReader( getPath( nameFile .getName() ), Charset.defaultCharset() ) )  {    
             numLines=0;
             
             while ( reader.readLine () != null )
@@ -60,10 +57,4 @@ public class ReaderFile implements IReader, IPathFiles
         }
         return numLines;
     }
-    
-    public String printInfoFile()
-    {
-            return contentFileText.toString();
-    }
-
 }

@@ -1,5 +1,6 @@
 package controllers.files;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -8,5 +9,5 @@ import java.io.IOException;
  */
 interface IWritter 
 {
-    void writterInFile(final String inTextFile ) throws IOException;
+    void writterInFile( File file , final String inTextFile ) throws IOException;
 }

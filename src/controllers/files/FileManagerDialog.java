@@ -2,27 +2,22 @@ package controllers.files;
 
 import java.io.File;
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FileManagerDialog extends JFileChooser implements IActionDialog, IPathFiles
-{
-    
-    public FileManagerDialog() 
-    {
-        super( MAIN_DIRECTORY );
-    }
+{  
+    public FileManagerDialog() {    super( WORKSPACE );     }
     
     @Override
     public File openDialog() throws Exception
     {
         setDialogType ( OPEN_DIALOG  );
-        setFileFilter ( new FileNameExtensionFilter( "Archivo de texto", TYPE_FILE.txt.toString(),  TYPE_FILE.text.toString() ) );
+        setFileFilter ( EXT );
 
            if ( ! isChooserValidDialogOpen()  ) 
-               throw  new Exception(" Cancelo el archivo " );            
+               throw  new Exception( " Calceled" );            
 
            if ( ! getSelectedFile().exists() )
-               throw  new Exception( "No selecciono nada" );
+               throw  new Exception(  "It File not Exist " );
 
            return getSelectedFile();     
     }
@@ -31,21 +26,15 @@ public class FileManagerDialog extends JFileChooser implements IActionDialog, IP
    public File saveDialog(  ) throws Exception
    {
         setDialogType( SAVE_DIALOG );
-        setFileFilter( new FileNameExtensionFilter( "todos los archivos *.txt", TYPE_FILE.txt.toString(),  TYPE_FILE.text.toString() ) );
+        setFileFilter( EXT );
         
         if( ! isChooserValidDialogSave() )
-           throw new Exception("Cancelar..");
+           throw new Exception( "Canceled" );
        
         return this.getSelectedFile() ;
    }
    
-   private boolean isChooserValidDialogSave()
-   {
-        return showSaveDialog( null ) == APPROVE_OPTION ;
-   }
+   private boolean isChooserValidDialogSave() { return showSaveDialog( null ) == APPROVE_OPTION ;   }
    
-   private boolean isChooserValidDialogOpen()
-   {
-        return showOpenDialog(null ) == APPROVE_OPTION ;
-   }
+   private boolean isChooserValidDialogOpen() { return showOpenDialog(null ) == APPROVE_OPTION ;    }
 }

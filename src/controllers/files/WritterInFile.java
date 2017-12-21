@@ -1,6 +1,7 @@
 package controllers.files;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -15,22 +16,15 @@ import java.util.Scanner;
  * @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
 public class WritterInFile implements IWritter, IPathFiles
-{         
-    private final String nameFile;
-    
-    public WritterInFile(final String fileToWriting) 
-    {
-         nameFile=fileToWriting.trim();
-    }
-
+{                
     @Override
-    public final void writterInFile( final String informationToFile) throws IOException 
+    public final void writterInFile( File myfile, final String informationToFile) throws IOException 
     {
-        if( nameFile.isEmpty() || nameFile.equals("") || nameFile==null)
-            throw new IOException(" Especifica un nombre para el archivo ");
+        if( myfile == null || myfile.exists() )
+            throw new IOException( "File No exists" );
         
         List<String > LineProcessed=processLine( informationToFile );
-        writeLargerTextFile( LineProcessed );
+        writeLargerTextFile( myfile , LineProcessed  );
     }  
     
     private  List<String> processLine(String aLine)
@@ -46,21 +40,25 @@ public class WritterInFile implements IWritter, IPathFiles
       return lines;
   }
  
-private void writeLargerTextFile(List<String> aLines) 
+private void writeLargerTextFile(File nameFile, List<String> aLines) 
                throws IOException 
        {	
 
-        try (BufferedWriter writer = Files.newBufferedWriter( getPath( nameFile )  , Charset .defaultCharset(),
-                                                                                                                              StandardOpenOption.WRITE ,
-                                                                                                                              StandardOpenOption.CREATE ,
-                                                                                                                              StandardOpenOption.TRUNCATE_EXISTING) )
+        try (BufferedWriter writer = Files.newBufferedWriter( 
+                getPath( nameFile. getName() )  , Charset .defaultCharset(),StandardOpenOption.WRITE , StandardOpenOption.CREATE , StandardOpenOption.TRUNCATE_EXISTING) )
         {
-
-            for(String line : aLines){
-              writer.write(line);
-              writer.newLine();
+            
+            if( aLines.size() == 1 )    
+                writer.write(aLines.get( 0 ));
+            else
+            {
+              for(String line : aLines)
+                {
+                  writer.write(line);
+                  writer.newLine();
+                }  
             }
-
+          
         }catch( IOException e){ throw  new IOException( " Error de Escritura" );}	
     }
     

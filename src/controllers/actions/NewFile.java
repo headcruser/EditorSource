@@ -2,18 +2,17 @@ package controllers.actions;
 
 import controllers.windowEditorController;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.border.BevelBorder;
 
 /**
  * Action for new Action
  *  @author Daniel Martinez Sierra <headcruser at gmail.com>
  */
-public class NewFile implements ActionListener
+public class NewFile extends Action
 {
     private final windowEditorController wcontroller;
 
-    public NewFile(windowEditorController viewEditor) {
+    public NewFile( final windowEditorController viewEditor) {
         this.wcontroller = viewEditor;
     }    
     @Override
