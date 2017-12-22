@@ -49,7 +49,7 @@ public class WritterInFile
     {
 
         try (BufferedWriter writer = Files.newBufferedWriter(
-                getPath(nameFile.getName()), Charset.defaultCharset(), StandardOpenOption.WRITE, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING))
+                getPathFile(nameFile.getName()), Charset.defaultCharset(), StandardOpenOption.WRITE, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING))
         {
 
             if (aLines.size() == 1)
@@ -68,11 +68,6 @@ public class WritterInFile
         {
             throw new IOException(" Error de Escritura");
         }
-    }
-
-    private Path getPath(final String fileToRead)
-    {
-        return Paths.get(new StringBuilder(WORKSPACE).append(fileToRead).toString());
     }
 
     //For Files  very Small

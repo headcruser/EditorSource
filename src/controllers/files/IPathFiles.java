@@ -1,4 +1,7 @@
- package controllers.files;
+package controllers.files;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Paths and Files for the system
@@ -10,4 +13,9 @@ public interface IPathFiles
     public static final String WORKSPACE=".\\sources\\workspace\\";
     public static final String ICON_LOGO="/icons/logo.png";
     public static final String MAIN_DIRECTORY=".";
+    
+    default  Path getPathFile(final String fileToRead)
+    {
+        return Paths.get( new StringBuilder( WORKSPACE ).append( fileToRead ).toString());
+    }
 }
