@@ -3,6 +3,7 @@ import controllers.actions.NewFile;
 import controllers.actions.OpenFile;
 import controllers.actions.Redo;
 import controllers.actions.Save;
+import controllers.actions.SaveAs;
 import controllers.actions.Undo;
 import controllers.actions.close;
 import controllers.files.ReaderFile;
@@ -62,7 +63,7 @@ public final class windowEditorController
         editorView.addSyntaxListener(new PaintColorSyntax( this ) );
         editorView.addActionRedo( new Redo( this ) );
         editorView.addActionSave( new Save( this ) );
-        editorView.addActionSaveAs( new Save( this ) );
+        editorView.addActionSaveAs( new SaveAs( this ) );
         editorView.addActionUndo( new Undo( this ) );
         editorView.addActionNewFile( new NewFile(  this ) );
         editorView.addActionClose( new close());
