@@ -23,15 +23,12 @@ public class SaveAs extends Action
     @Override
     public void actionPerformed(ActionEvent event) 
     {
-        
         try 
         {
             File aux=_dialogFile.saveDialog();
             wController.writter.writterInFile( aux, wController.getView().getTextCode() );
-             wController.getView().enableSaveButton(false);     
+             wController.getView().buttonSave .setVisible( false );     
              wController.document=aux;
-            
-        } catch (Exception ex) {
-        }
+        } catch (Exception ex) {}
     }
 }

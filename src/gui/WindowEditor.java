@@ -1,4 +1,3 @@
-
 package gui;
 
 import controllers.actions.Action;
@@ -23,29 +22,13 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
     }
 
     public void windowCenterPosition(){ this.setLocationRelativeTo( null ); }
-      
-    public void addSyntaxListener(CaretListener event) { this.editor.addCaretListener( event ); }
     
-    public void addActionSave( Action saveListener ){ this.buttonSave.addActionListener( saveListener );}
+    public void addAction( javax.swing.JButton button , Action actionButton) { button.addActionListener( actionButton ); }
+    
+    public void addActionItem(  javax.swing.JMenuItem item , Action actionItem){ item.addActionListener(actionItem); }
 
-    public void addActionUndo( Action undoListener ){ this.buttonUndo.addActionListener( undoListener );}
-    
-    public void addActionRedo( Action redoListener ){ this.buttonRedo.addActionListener( redoListener );}
-    
-    public void addActionNewFile (Action  item){ this.itemNew.addActionListener( item );}
-    
-    public void addActionClose (Action  item){ this.itemClose.addActionListener(item ); }
-    
-    public void addActionOpen(Action  item){ this.itemOpen.addActionListener(item ); }
-    
-    public void addActionSaveAs( Action saveListener ){ itemSaveAs.addActionListener( saveListener );}
-      
-    public void enableUndoButton(final boolean enable ){ buttonUndo.setEnabled(enable); }
-    
-    public void enableRedoButton(final boolean enable ){ buttonRedo.setEnabled(enable);}
-    
-    public void enableSaveButton(final boolean enable ) { buttonSave.setEnabled(enable);}
-    
+    public void addSyntaxListener(CaretListener event) { this.editor.addCaretListener( event ); }
+     
     public void isEditorEditable( final boolean status) {   editor.setEditable(status ); }
     
     public String getTextCode(){ return editor.getText();}    
@@ -114,7 +97,7 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
         jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
         helpMenu = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        itemAbout = new javax.swing.JMenuItem();
 
         Menu.setBackground(new java.awt.Color(0, 0, 0));
         Menu.setText("jMenu1");
@@ -270,10 +253,10 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
 
         helpMenu.setText("help");
 
-        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/003-information.png"))); // NOI18N
-        jMenuItem8.setText("about editor");
-        helpMenu.add(jMenuItem8);
+        itemAbout.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/003-information.png"))); // NOI18N
+        itemAbout.setText("about editor");
+        helpMenu.add(itemAbout);
 
         menuPrincipal.add(helpMenu);
 
@@ -285,17 +268,18 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContenedorPrincipal;
     private javax.swing.JMenu Menu;
-    private javax.swing.JButton buttonRedo;
-    private javax.swing.JButton buttonSave;
-    private javax.swing.JButton buttonUndo;
+    public javax.swing.JButton buttonRedo;
+    public javax.swing.JButton buttonSave;
+    public javax.swing.JButton buttonUndo;
     private javax.swing.JTextPane editor;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JMenuItem itemClose;
-    private javax.swing.JMenuItem itemNew;
-    private javax.swing.JMenuItem itemOpen;
-    private javax.swing.JMenuItem itemSave;
-    private javax.swing.JMenuItem itemSaveAs;
+    public javax.swing.JMenuItem itemAbout;
+    public javax.swing.JMenuItem itemClose;
+    public javax.swing.JMenuItem itemNew;
+    public javax.swing.JMenuItem itemOpen;
+    public javax.swing.JMenuItem itemSave;
+    public javax.swing.JMenuItem itemSaveAs;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
@@ -303,7 +287,6 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenu menuEdit;

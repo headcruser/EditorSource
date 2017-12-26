@@ -3,8 +3,6 @@ package controllers.actions;
 import controllers.files.FileManagerDialog;
 import controllers.windowEditorController;
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.border.BevelBorder;
 
 /**

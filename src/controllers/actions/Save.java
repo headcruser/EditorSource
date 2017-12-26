@@ -13,12 +13,12 @@ import java.util.logging.Logger;
  */
 public class Save extends Action
 {
-    private final windowEditorController wController;
+    private final windowEditorController _wController;
     private final  FileManagerDialog _dialogFile;
 
     public Save(windowEditorController controller) 
     {
-        wController = controller;  
+        _wController = controller;  
         _dialogFile=new FileManagerDialog( );
     }
     
@@ -27,9 +27,9 @@ public class Save extends Action
     {        
         try 
         {
-            File aux=wController.document;
-            wController.writter.writterInFile( aux, wController.getView().getTextCode() );
-             wController.getView().enableSaveButton(false);     
+            File aux=_wController.document;
+            _wController.writter.writterInFile( aux, _wController.getView().getTextCode() );
+             _wController.getView().buttonSave.setEnabled( false );     
              
         } catch (Exception ex) {
             Logger.getLogger(Save.class.getName()).log(Level.SEVERE, null, ex);

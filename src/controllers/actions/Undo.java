@@ -14,7 +14,7 @@ public class Undo extends Action
     public Undo( windowEditorController viewEdirtor ) 
     {
         this.wController = viewEdirtor;
-        wController.getView().enableUndoButton( false );
+        wController.getView().buttonUndo.setEnabled( false );
     }
     
     @Override
@@ -22,13 +22,13 @@ public class Undo extends Action
     {
         if (!  articleNumberValid() )
         {
-            wController.getView().enableUndoButton( false );
+            wController.getView().buttonUndo.setEnabled( false );
             return;
         }
         
         wController.decreaseArticle();            
         wController.getView().getAreaEditor().setText( getBoxString() );
-        wController.getView().enableRedoButton( true );
+        wController.getView().buttonUndo.setEnabled( true );
     }
 
     private String getBoxString() 

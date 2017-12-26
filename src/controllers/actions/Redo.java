@@ -13,14 +13,14 @@ public class Redo extends Action
 
     public Redo(windowEditorController viewEditor) {
         this.wcontroller = viewEditor;
-        viewEditor.getView().enableRedoButton( false );
+        viewEditor.getView().buttonRedo.setEnabled( false );
     }    
     
     @Override
     public void actionPerformed( ActionEvent event ) 
     {
         if (!  saveFilesNumberValid() ){
-            wcontroller.getView().enableRedoButton( false );
+            wcontroller.getView().setEnabled(false);
             return;
         }
            
@@ -31,7 +31,7 @@ public class Redo extends Action
                             getMemento( wcontroller.getCurrentArticle() ) );
             
             wcontroller.getView().getAreaEditor().setText(codeBoxString);
-            wcontroller.getView().enableUndoButton( true );
+            wcontroller.getView().setEnabled(false);
     }
 
     private boolean saveFilesNumberValid() 

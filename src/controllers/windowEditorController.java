@@ -1,4 +1,5 @@
 package controllers;
+import controllers.actions.AboutUS;
 import controllers.actions.NewFile;
 import controllers.actions.OpenFile;
 import controllers.actions.Redo;
@@ -29,24 +30,24 @@ public final class windowEditorController
     public File document;
     private StatusConsole statusLine;
    
-   final private WindowEditor editorView;
+   final private WindowEditor _view;
    final public ReaderFile reader;
    final public WritterInFile writter;
    
     public windowEditorController(WindowEditor view) throws Exception
     {
-        editorView = view;
+        _view = view;
         createControllers(  );
         reader=new ReaderFile();
         writter= new WritterInFile();
         configWindow();
-        editorView.isEditorEditable( false );
+        _view.isEditorEditable( false );
     }
     
     private void createControllers( )
     {
-        lineNumberAspect=new TextLineNumber( editorView.getAreaEditor() );
-        statusLine=new StatusConsole( editorView );
+        lineNumberAspect=new TextLineNumber( _view.getAreaEditor() );
+        statusLine=new StatusConsole( _view );
         careTaker=new CareTaker();
         originator=new Originator(); 
         assingEvents( );
@@ -54,25 +55,28 @@ public final class windowEditorController
     
     private void configWindow() 
     {
-        editorView.windowCenterPosition();
-        editorView.initTextLineAspect( lineNumberAspect );
+        _view.windowCenterPosition();
+        _view.initTextLineAspect( lineNumberAspect );
     }
     
     private void assingEvents() 
     {
-        editorView.addSyntaxListener(new PaintColorSyntax( this ) );
-        editorView.addActionRedo( new Redo( this ) );
-        editorView.addActionSave( new Save( this ) );
-        editorView.addActionSaveAs( new SaveAs( this ) );
-        editorView.addActionUndo( new Undo( this ) );
-        editorView.addActionNewFile( new NewFile(  this ) );
-        editorView.addActionClose( new close());
-        editorView.addActionOpen(new OpenFile( this ) );
+        _view.addSyntaxListener(new PaintColorSyntax( this ) );
+        
+        _view.addAction( _view.buttonRedo,  new Redo( this ) );
+        _view.addAction( _view.buttonSave , new Save( this ) );
+        _view.addAction( _view.buttonUndo , new Undo( this ) );
+        
+        _view.addActionItem( _view.itemSaveAs,new SaveAs( this ) );        
+        _view.addActionItem( _view.itemNew ,new NewFile(  this ) );
+        _view.addActionItem( _view.itemClose, new close() ) ;
+        _view.addActionItem( _view.itemOpen, new OpenFile( this ) );
+        _view.addActionItem( _view.itemAbout, new AboutUS( this ) );
     }
     
-    public WindowEditor getView() { return editorView;}
+    public WindowEditor getView() { return _view;}
     
-    public void showWindowEditor(final boolean isVisible) { editorView.setVisible(isVisible); }
+    public void showWindowEditor(final boolean isVisible) { _view.setVisible(isVisible); }
     
     public void  increaseSaveFiles() { saveFiles ++; }
 
