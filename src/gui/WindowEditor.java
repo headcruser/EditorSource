@@ -3,6 +3,7 @@ package gui;
 import controllers.actions.Action;
 import controllers.files.IPathFiles;
 import java.awt.Component;
+import javax.swing.JComponent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.StyledDocument;
@@ -89,13 +90,13 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
         menuEdit = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         optionMenu = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        checkTool = new javax.swing.JCheckBoxMenuItem();
+        checkConsole = new javax.swing.JCheckBoxMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
+        itemFonts = new javax.swing.JMenuItem();
+        menuThemes = new javax.swing.JMenu();
+        chItemDark = new javax.swing.JCheckBoxMenuItem();
+        chItemClassic = new javax.swing.JCheckBoxMenuItem();
         helpMenu = new javax.swing.JMenu();
         itemAbout = new javax.swing.JMenuItem();
 
@@ -224,30 +225,45 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
 
         optionMenu.setText("options");
 
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("showTools");
-        optionMenu.add(jCheckBoxMenuItem1);
+        checkTool.setSelected(true);
+        checkTool.setText("showTools");
+        checkTool.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/005-repair-tools.png"))); // NOI18N
+        checkTool.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                checkTool(evt);
+            }
+        });
+        optionMenu.add(checkTool);
 
-        jCheckBoxMenuItem2.setSelected(true);
-        jCheckBoxMenuItem2.setText("state console");
-        optionMenu.add(jCheckBoxMenuItem2);
+        checkConsole.setSelected(true);
+        checkConsole.setText("state console");
+        checkConsole.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                checkConsole(evt);
+            }
+        });
+        optionMenu.add(checkConsole);
         optionMenu.add(jSeparator2);
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/004-text-editor.png"))); // NOI18N
-        jMenuItem5.setText("Fonts");
-        optionMenu.add(jMenuItem5);
+        itemFonts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/004-text-editor.png"))); // NOI18N
+        itemFonts.setText("Fonts");
+        optionMenu.add(itemFonts);
 
-        jMenu4.setText("themes");
+        menuThemes.setText("themes");
 
-        jCheckBoxMenuItem3.setSelected(true);
-        jCheckBoxMenuItem3.setText("Dark");
-        jMenu4.add(jCheckBoxMenuItem3);
+        chItemDark.setSelected(true);
+        chItemDark.setText("Dark");
+        menuThemes.add(chItemDark);
 
-        jCheckBoxMenuItem4.setSelected(true);
-        jCheckBoxMenuItem4.setText("Clasic");
-        jMenu4.add(jCheckBoxMenuItem4);
+        chItemClassic.setSelected(true);
+        chItemClassic.setText("Clasic");
+        menuThemes.add(chItemClassic);
 
-        optionMenu.add(jMenu4);
+        optionMenu.add(menuThemes);
 
         menuPrincipal.add(optionMenu);
 
@@ -265,32 +281,52 @@ public final class WindowEditor extends javax.swing.JFrame implements IPathFiles
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void checkTool(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkTool
+    {//GEN-HEADEREND:event_checkTool
+        showComponent( checkTool, menuToolbar  );
+    }//GEN-LAST:event_checkTool
+
+    private void checkConsole(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkConsole
+    {//GEN-HEADEREND:event_checkConsole
+        showComponent( checkConsole, panelStatus );
+    }//GEN-LAST:event_checkConsole
+
+    private void showComponent(javax.swing.JCheckBoxMenuItem check  , JComponent component)
+    {
+        if ( check.isSelected() == true )
+            component.setVisible( true );        
+        else 
+            component.setVisible( false );
+        
+        this.repaint();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContenedorPrincipal;
     private javax.swing.JMenu Menu;
     public javax.swing.JButton buttonRedo;
     public javax.swing.JButton buttonSave;
     public javax.swing.JButton buttonUndo;
+    private javax.swing.JCheckBoxMenuItem chItemClassic;
+    private javax.swing.JCheckBoxMenuItem chItemDark;
+    private javax.swing.JCheckBoxMenuItem checkConsole;
+    private javax.swing.JCheckBoxMenuItem checkTool;
     private javax.swing.JTextPane editor;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     public javax.swing.JMenuItem itemAbout;
     public javax.swing.JMenuItem itemClose;
+    private javax.swing.JMenuItem itemFonts;
     public javax.swing.JMenuItem itemNew;
     public javax.swing.JMenuItem itemOpen;
     public javax.swing.JMenuItem itemSave;
     public javax.swing.JMenuItem itemSaveAs;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenu menuEdit;
     private javax.swing.JMenuBar menuPrincipal;
+    private javax.swing.JMenu menuThemes;
     private javax.swing.JToolBar menuToolbar;
     private javax.swing.JMenu optionMenu;
     private javax.swing.JPanel panelStatus;
